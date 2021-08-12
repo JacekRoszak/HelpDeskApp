@@ -1,10 +1,10 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 #alerts {
-	.alert-alert {
+	& .alert-alert {
 		@extend .alert-danger
 	}
 
-	.alert-notice {
+	& .alert-notice {
 		@extend .alert-success
 	}
 }
