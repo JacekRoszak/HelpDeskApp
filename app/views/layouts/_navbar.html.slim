@@ -1,0 +1,17 @@
+nav#navbar-main.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  .container
+    a.navbar-brand href="#{root_path}"  Athletes Den
+    button.navbar-toggler aria-controls="navbarNavDropdown" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarNavDropdown" data-bs-toggle="collapse" type="button" 
+      span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      ul.navbar-nav
+        li.nav-item
+          = link_to 'Home', root_path, class: 'nav-link'
+        - unless current_user
+          li.nav-item
+            = link_to  "Sign up", new_user_registration_path, class: 'nav-link'
+          li.nav-item.dropdown.float-right
+              = link_to  "Sign in", new_user_session_path, class: 'nav-link'
+        - else  
+          li.nav-item.dropdown.float-right
+            = link_to  "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link'
