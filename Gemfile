@@ -7,6 +7,7 @@ gem 'activeadmin'
 gem 'arctic_admin'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cancancan'
+gem 'capybara'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'guard'
@@ -18,18 +19,16 @@ gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.4'
 gem 'redis', '~> 4.0'
-gem 'rubocop-rails'
 gem 'rspec-rails'
+gem 'rubocop-rails'
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'turbolinks', '~> 5'
 gem 'therubyracer'
+gem 'turbolinks', '~> 5'
 gem 'twitter-bootstrap-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'webpacker', '~> 5.0'
-gem 'capybara'
-
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
