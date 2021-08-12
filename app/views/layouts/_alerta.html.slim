@@ -1,0 +1,4 @@
+- flash.each do |key, message|
+  #alerts.text-center.alert class="alert alert-#{ key }"
+    .container
+      = message.class == Array ? message.join('<br>').html_safe : message
