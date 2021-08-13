@@ -11,8 +11,7 @@ html lang="en"
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    - if current_user
-    	= render 'layouts/navbar'
+    = render 'layouts/navbar'
     = render 'layouts/alerts'
     .container
     	= yield
