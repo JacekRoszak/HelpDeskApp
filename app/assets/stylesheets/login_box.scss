@@ -1,17 +1,16 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 #login-box {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -150px;
-  margin-left: -200px;
+  transform:translate(-50%, -50%);
   width: 400px;
   background-color: #1B1B1D;
   border-radius: 8px;
   padding: 20px;
 
-  & input[type=email], & input[type=password] {
+  & input[type=email], & input[type=password], & input[type='text'] {
     background-color: #222225 !important;
     @extend .text-light;
     margin: 8px;
@@ -24,11 +23,13 @@
     border-color: #303035 !important;
     border-bottom: 1px solid;
     border-radius: 4px;
-
+    -webkit-text-fill-color:#757575;
   }
-  & input[type=email]:focus, & input[type=password]:focus,
-  & input[type=email]:focus-visible, & input[type=password]:focus-visible {
+  & input[type=email]:focus, & input[type=password]:focus, & input[type='text']:focus,
+  & input[type=email]:focus-visible, & input[type=password]:focus-visible, & input[type='text']:focus-visible {
     outline: none !important;
+    @extend .text-light;
+    -webkit-text-fill-color:#757575;
   }
 
   & input[type=checkbox] {

@@ -1,0 +1,21 @@
+#login-box
+  h3= t('.title', resource: resource_name.to_s.humanize)
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = bootstrap_devise_error_messages!
+    = f.text_field :first_name, autocomplete: 'given-name', placeholder: 'first name'
+    = f.text_field :last_name, autocomplete: 'family-name', placeholder: 'last name'
+    = f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: 'email'
+    = f.password_field :password, autocomplete: 'new-password', placeholder: 'password'
+    = f.password_field :password_confirmation, autocomplete: 'new-password', placeholder: 'confirm password'
+    = f.password_field :current_password, autocomplete: 'current-password', placeholder: 'current password'
+    .row
+      .col-4.p-1
+        = f.text_field :cell_number, style: 'width:100% !important;', placeholder: 'tel'
+      .col-4.p-1
+        = f.text_field :work_number, style: 'width:100% !important;', placeholder: 'work number'
+      .col-4.p-1
+        = f.text_field :inner_number, style: 'width:100% !important;', placeholder: 'inner number'
+
+    / small.form-text.text-muted= t('.we_need_your_current_password_to_confirm_your_changes')
+    / br
+    = f.submit t('.update'), class: 'btn btn-outline-primary float-end'

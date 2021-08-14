@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     # devise_parameter_sanitizer.permit(:sign_up, keys: :name)
     # devise_parameter_sanitizer.permit(:sign_in, keys: :name)
-    # devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name first_name last_name cell_number work_number inner_number])
   end
 end
