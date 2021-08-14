@@ -12,8 +12,6 @@ RSpec.feature 'User authentication' do
 
       click_link 'Sign up'
 
-      expect(page).to have_content('(6 characters minimum)')
-
       fill_in 'user[email]', with: 'test@example.com'
       fill_in 'user[password]', with: 'password'
       fill_in 'user[password_confirmation]', with: 'password'
