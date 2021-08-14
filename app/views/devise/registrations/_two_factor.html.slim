@@ -1,0 +1,14 @@
+- if current_user.otp_required_for_login?
+  . = link_to "Disable", two_factor_path, method: :delete, remote: true, class: "btn btn-outline-danger"
+  .d-inline-block.text-center
+    | Install Google Authenticator:
+    |  #{link_to "Android", "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en", target: :blank}
+    |  or
+    |  #{link_to "iOS", "https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8", target: :blank}
+    | In the app, select "Set up account" or the Plus (+) sign.
+    | Choose "Scan barcode"
+  .d-inline-block.text-center.bg-light.p-2.text-center
+    = current_user.otp_qr_code.html_safe
+- else
+  p When you login, you will be required to enter a one-time code along to one of your devices.
+  . = link_to "Enable", two_factor_path, method: :post, remote: true, class: "btn btn-outline-success"

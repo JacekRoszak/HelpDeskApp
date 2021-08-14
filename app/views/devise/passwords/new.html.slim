@@ -1,4 +1,4 @@
-#login-box
+#login-box.small-centred-window
   h3= t('.forgot_your_password')
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
     = bootstrap_devise_error_messages!

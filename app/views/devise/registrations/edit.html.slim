@@ -1,21 +1,29 @@
-#login-box
-  h3= t('.title', resource: resource_name.to_s.humanize)
+#login-box.edit-profile.mt-4.text-center.mx-auto
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    .d-inline-block.align-top.mt-1
+      h3 = t('.title', resource: resource_name.to_s.humanize)
+    .d-inline-block style='padding-left:10px;'
+      = f.submit t('.update'), class: 'btn btn-outline-primary float-end'
+    br
     = bootstrap_devise_error_messages!
-    = f.text_field :first_name, autocomplete: 'given-name', placeholder: 'first name'
-    = f.text_field :last_name, autocomplete: 'family-name', placeholder: 'last name'
-    = f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: 'email'
-    = f.password_field :password, autocomplete: 'new-password', placeholder: 'password'
-    = f.password_field :password_confirmation, autocomplete: 'new-password', placeholder: 'confirm password'
-    = f.password_field :current_password, autocomplete: 'current-password', placeholder: 'current password'
-    .row
-      .col-4.p-1
+    .d-inline-block.p-2 style='width: 350px !important;'
+      = f.text_field :first_name, autocomplete: 'given-name', placeholder: 'first name'
+      = f.text_field :last_name, autocomplete: 'family-name', placeholder: 'last name'
+      = f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: 'email'
+    .d-inline-block.p-2 style='width: 350px !important;'
+      = f.password_field :password, autocomplete: 'new-password', placeholder: 'password'
+      = f.password_field :password_confirmation, autocomplete: 'new-password', placeholder: 'confirm password'
+      = f.password_field :current_password, autocomplete: 'current-password', placeholder: 'current password'
+    .row.mx-auto.p-2
+      .col-4.p-0
         = f.text_field :cell_number, style: 'width:100% !important;', placeholder: 'tel'
-      .col-4.p-1
+      .col-4.px-1
         = f.text_field :work_number, style: 'width:100% !important;', placeholder: 'work number'
-      .col-4.p-1
+      .col-4.p-0
         = f.text_field :inner_number, style: 'width:100% !important;', placeholder: 'inner number'
-
-    / small.form-text.text-muted= t('.we_need_your_current_password_to_confirm_your_changes')
-    / br
-    = f.submit t('.update'), class: 'btn btn-outline-primary float-end'
+      
+    
+  .text-center
+    h6 Two Factor Authentication
+    #two_factor.m-2
+      = render partial: 'devise/registrations/two_factor'

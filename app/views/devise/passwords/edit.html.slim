@@ -1,4 +1,4 @@
-#login-box
+#login-box.small-centred-window style='max-width:100% !important;'
   h1= t('.change_your_password')
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
     = bootstrap_devise_error_messages!
@@ -13,4 +13,3 @@
       = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control'
     .form-group
       = f.submit t('.change_my_password'), class: 'btn btn-primary'
-  = render 'devise/shared/links'

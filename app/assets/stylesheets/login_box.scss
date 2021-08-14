@@ -1,20 +1,24 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-#login-box {
+.small-centred-window {
   position: absolute;
   top: 50%;
   left: 50%;
   transform:translate(-50%, -50%);
-  width: 400px;
+  max-width: 400px;
+  min-width: 350px;
   background-color: #1B1B1D;
   border-radius: 8px;
   padding: 20px;
+}
 
+#login-box {
   & input[type=email], & input[type=password], & input[type='text'] {
     background-color: #222225 !important;
     @extend .text-light;
     margin: 8px;
     width: 100%;
+    max-width: 350px !important;
     padding: 0.375rem 0.75rem;
     line-height: 1.7;
     margin-left: 0 !important;

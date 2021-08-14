@@ -1,11 +1,22 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  #  :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable
+  devise :registerable, :confirmable,
+         :recoverable, :rememberable, :validatable,
+         :two_factor_authenticatable,
+         otp_secret_encryption_key: ENV['OTP_KEY']
 
-  # overwrite for activejob 
+  before_create :default_values
+  def default_values
+    self.otp_required_for_login = false
+  end
+
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  def otp_qr_code
+    issuer = 'HelpDesk'
+    label = "#{issuer}:#{email}"
+    qrcode = RQRCode::QRCode.new(otp_provisioning_uri(label,issuer: issuer))
+    qrcode.as_svg(module_size: 3)
   end
 end

@@ -1,8 +1,9 @@
-#login-box.dark-borders
+#login-box.dark-borders.small-centred-window
   h2 = t('.sign_in')
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     = f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: 'Email'
     = f.password_field :password, autocomplete: 'current-password', placeholder: 'Password'
+    = f.text_field :otp_attempt, autocomplete: "off", placeholder: '2FA Code'
     - if devise_mapping.rememberable?
       .form-check.d-inline-block style='width:fit-content;'
         = f.check_box :remember_me, class: 'form-check-input'
