@@ -1,0 +1,13 @@
+#login-box.dark-borders
+  h2 = t('.sign_in')
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    = f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: 'Email'
+    = f.password_field :password, autocomplete: 'current-password', placeholder: 'Password'
+    - if devise_mapping.rememberable?
+      .form-check.d-inline-block style='width:fit-content;'
+        = f.check_box :remember_me, class: 'form-check-input'
+        = f.label :remember_me, class: 'form-check-label' do
+          = resource.class.human_attribute_name('remember_me')
+      .d-inline-block.float-end
+        = f.submit  t('.sign_in'), class: 'btn btn-outline-primary'
+  / = render 'devise/shared/links'

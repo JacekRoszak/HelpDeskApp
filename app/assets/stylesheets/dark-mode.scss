@@ -1,0 +1,10 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+body {
+  background-color: #101011 !important;
+  @extend .text-light;
+}
+
+.bg-warm-dark {
+  background-color: #222225 !important;
+}

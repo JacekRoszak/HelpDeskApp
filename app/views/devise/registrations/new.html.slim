@@ -1,0 +1,8 @@
+#login-box
+  h2= t('.sign_up')
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = bootstrap_devise_error_messages!
+    = f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: 'Email'
+    = f.password_field :password, autocomplete: 'current-password', placeholder: 'Password'
+    = f.password_field :password_confirmation, autocomplete: 'current-password', placeholder: 'Confirm password'
+    = f.submit t('.sign_up'), class: 'btn btn-outline-primary float-end'
