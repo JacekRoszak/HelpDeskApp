@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# User.create(name: 'admin', password: 'admin', admin?: true)
+
+RequestStatus.destroy_all
+statuses = [
+  { name: 'Waiting', color: '', background: '' },
+  { name: 'Assigned', color: '', background: '' },
+  { name: 'In progress', color: '', background: '' },
+  { name: 'On hold', color: '', background: '' },
+  { name: 'Finished', color: '', background: '' },
+  { name: 'Cancelled', color: '', background: '' }
+]
+statuses.each { |status_params| RequestStatus.create(status_params) }
