@@ -2,14 +2,13 @@ class ServiceRequestsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @service_requests = ServiceRequest.all
+    @service_request = ServiceRequest.new
   end
 
   def show
   end
 
   def new
-    @service_request = ServiceRequest.new
   end
 
   def edit

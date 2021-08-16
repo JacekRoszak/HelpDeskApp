@@ -1,11 +1,15 @@
 = simple_form_for @service_request, html: { class: "form-horizontal" } do |f|
-  = f.input :name
-  = f.association :request_status
-  = f.hidden_field :user_id, value: current_user.id
-  = f.association :location
-  = f.input :important
-  = f.input :raport
-  = f.association :department
-  = f.button :submit, class: 'btn-primary'
-  '
-  = link_to t('.cancel', default: t("helpers.links.cancel")), service_requests_path, class: 'btn btn-default'
+  .row.dark-mode
+    .col-sm-3
+      = f.input :name, as: :string, placeholder: 'Your request', label: false
+    .col-sm-3
+      = f.hidden_field :request_status_id, value: RequestStatus.first.id
+      = f.hidden_field :user_id, value: current_user.id
+      = f.association :location, label: false, include_blank: 'Location'
+    .col-sm-3
+      = f.association :department, collection: Department.technicians, label: 'Destination', label: false, include_blank: 'Destination'
+    .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
+      .col-6.d-flex.justify-content-center style='align-items:center;'
+        = f.input :important, class:'form-check-input'
+      .col-6.d-flex.justify-content-end style='align-items:center;'
+        = f.button :submit, 'Add', class: 'btn-primary'

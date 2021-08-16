@@ -1,0 +1,9 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.table-row-top {
+  border-radius: 8px 8px 0 0;
+}
+
+.table-row-bottom {
+  border-radius: 0 0 8px 8px;
+}

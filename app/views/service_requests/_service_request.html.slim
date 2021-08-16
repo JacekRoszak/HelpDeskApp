@@ -1,0 +1,34 @@
+.row.p-2.table-row-top.text-center.mt-2 style="color: #{service_request.request_status.color};background-color:#{service_request.request_status.background};"
+  .col-sm-2.d-flex.justify-content-center style='align-items:center;'
+    .d-block.d-sm-none.text-muted
+      | Created
+    .mx-1
+      | #{time_ago_in_words(service_request.created_at)}
+    .d-block.d-sm-none.text-muted
+      | ago 
+  .col-sm-2.d-flex.justify-content-center style='align-items:center;'
+    .d-block.d-sm-none.text-muted
+      | by
+    .mx-1
+      = service_request.owner
+  .col-sm-2.d-flex.justify-content-center style='align-items:center;'
+    .d-block.d-sm-none.text-muted
+      | location
+    .mx-1
+      = service_request.location.name
+  .col-sm-2.d-flex.justify-content-center style='align-items:center;'
+    .d-block.d-sm-none.text-muted
+      | status
+    .mx-1
+      = service_request.status
+  .col-sm-2.d-flex.justify-content-center style='align-items:center;'
+    .d-block.d-sm-none.text-muted
+      | destination
+    .mx-1
+    = service_request.department.name
+  .col-sm-2.d-flex.justify-content-center style='align-items:center;'
+    = link_to t('.edit', :default => t("helpers.links.edit")), edit_service_request_path(service_request), class: 'btn btn-warning btn-sm me-2'
+    = link_to t('.destroy', :default => t("helpers.links.destroy")), service_request_path(service_request), method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class: 'btn btn-sm btn-danger'
+.row.p-2.table-row-bottom style="color: #{service_request.request_status.color};background-color:#{service_request.request_status.background};"
+  .col-sm-12.d-flex.justify-content-center style='align-items:center;'
+    = service_request.name
