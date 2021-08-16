@@ -7,26 +7,16 @@ RSpec.feature 'User authentication' do
     @user.save
   end
 
+  def give_valid_credentials
+    fill_in 'user[email]', with: 'test@example.com'
+    fill_in 'user[password]', with: 'password'
+    fill_in 'user[password_confirmation]', with: 'password'
+  end
 
-  scenario 'User edits his profile' do
-    visit '/'
-    click_link 'Sign in'
-    fill_in 'user[email]', with: @user.email
-    fill_in 'user[password]', with: @user.password
-    click_button 'Log in'
-    expect(page).to have_content('Signed in successfully.')
-    expect(page).to have_link('Profile')
-
-    click_link('Profile')
-    expect(page).to have_content('Edit User')
-    expect(page).to have_button('Update')
-    expect(page).to have_field('email')
-
-    fill_in 'user[first_name]', with: 'Johnny'
-    fill_in 'user[last_name]', with: 'Walker'
-
-    click_button 'Update'
-    expect(page).to have_content('Your account has been updated successfully.')
+  def give_invalid_credentials
+    fill_in 'user[email]', with: ''
+    fill_in 'user[password]', with: ''
+    fill_in 'user[password_confirmation]', with: ''
   end
 
   scenario 'User forgets his password' do
@@ -38,17 +28,16 @@ RSpec.feature 'User authentication' do
     expect(page).to have_content('You will receive an email with instructions on how to reset your password in a few minutes.')
   end
 
-  context 'Sign up ' do
+  context 'Sign up' do
+    before do
+      visit '/'
+      click_link 'Sign up'
+    end
+
     scenario 'with valid credentials' do
       @user.destroy
-      visit '/'
 
-      click_link 'Sign up'
-
-      fill_in 'user[email]', with: 'test@example.com'
-      fill_in 'user[password]', with: 'password'
-      fill_in 'user[password_confirmation]', with: 'password'
-
+      give_valid_credentials
       click_button 'Sign up'
 
       expect(page).to have_content('A message with a confirmation link has been sent to your email address.')
@@ -57,13 +46,7 @@ RSpec.feature 'User authentication' do
     end
 
     scenario 'without giving credentials' do
-      visit '/' 
-
-      click_link 'Sign up'
-
-      fill_in 'user[email]', with: ''
-      fill_in 'user[password]', with: ''
-      fill_in 'user[password_confirmation]', with: ''
+      give_invalid_credentials
 
       click_button 'Sign up'
 
@@ -75,13 +58,8 @@ RSpec.feature 'User authentication' do
     end
 
     scenario 'with used credentials' do
-      visit '/'
-
-      click_link 'Sign up'
-
+      give_invalid_credentials
       fill_in 'user[email]', with: @user.email
-      fill_in 'user[password]', with: ''
-      fill_in 'user[password_confirmation]', with: ''
 
       click_button 'Sign up'
 
@@ -94,48 +72,49 @@ RSpec.feature 'User authentication' do
   end
 
   context 'Sign in' do
-    scenario 'with valid credentials' do
+    before do
       visit '/'
-
       click_link 'Sign in'
+    end
+
+    scenario 'with valid credentials' do
       fill_in 'user[email]', with: @user.email
       fill_in 'user[password]', with: @user.password
       click_button 'Log in'
 
       expect(page).to have_content('Signed in successfully.')
       expect(page).to have_link('Sign out')
-      expect(page).not_to have_link('Sign in')
-      expect(page).not_to have_link('Sign up')
     end
 
     scenario 'with invalid credentials' do
-      visit '/'
-
-      click_link 'Sign in'
       fill_in 'user[email]', with: ''
       fill_in 'user[password]', with: ''
       click_button 'Log in'
 
       expect(page).to have_content('Invalid Email or password.')
       expect(page).not_to have_link('Sign out')
-      expect(page).to have_link('Sign in')
-      expect(page).to have_link('Sign up')
     end
   end
 
-  context 'Sign out User' do
+  context 'Logged in user' do
     before do
+      sign_in @user
       visit '/'
-
-      click_link 'Sign in'
-      fill_in 'user[email]', with: @user.email
-      fill_in 'user[password]', with: @user.password
-      click_button 'Log in'
     end
 
-    scenario 'with valid credentials' do
-      visit '/'
+    scenario 'User edits his profile' do
+      expect(page).to have_link('Profile')
+      click_link('Profile')
+      expect(page).to have_content('Edit User')
+      expect(page).to have_button('Update')
+      expect(page).to have_field('email')
+      fill_in 'user[first_name]', with: 'Johnny'
+      fill_in 'user[last_name]', with: 'Walker'
+      click_button 'Update'
+      expect(page).to have_content('Your account has been updated successfully.')
+    end
 
+    scenario 'User signes out' do
       click_link 'Sign out'
       expect(page).to have_content('Signed out successfully.')
       expect(page).not_to have_link('Sign out')

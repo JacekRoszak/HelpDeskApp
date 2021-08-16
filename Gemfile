@@ -5,8 +5,8 @@ ruby '3.0.0'
 
 gem 'rails', '~> 6.1.4'
 
-# gem 'activeadmin'
-# gem 'arctic_admin'
+gem 'activeadmin'
+gem 'arctic_admin'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cancancan'
 gem 'capybara'

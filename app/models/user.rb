@@ -19,4 +19,8 @@ class User < ApplicationRecord
     qrcode = RQRCode::QRCode.new(otp_provisioning_uri(label,issuer: issuer))
     qrcode.as_svg(module_size: 3)
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

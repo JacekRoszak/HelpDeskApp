@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   get 'pages/home'
   get 'pages/about'
 
