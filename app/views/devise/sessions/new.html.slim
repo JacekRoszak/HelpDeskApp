@@ -1,4 +1,4 @@
-#login-box.dark-borders.small-centred-window
+.dark-mode.dark-borders.small-centred-window
   h2 = t('.sign_in')
   = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     = f.email_field :email, autofocus: true, autocomplete: 'email', placeholder: 'Email'

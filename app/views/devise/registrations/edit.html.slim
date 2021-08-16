@@ -1,4 +1,4 @@
-#login-box.edit-profile.mt-4.text-center.mx-auto
+.dark-mode.edit-profile.mt-4.text-center.mx-auto
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     .d-inline-block.align-top.mt-1
       h3 = t('.title', resource: resource_name.to_s.humanize)
