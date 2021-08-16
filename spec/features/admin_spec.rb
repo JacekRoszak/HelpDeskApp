@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.feature 'Admin panel' do
   before do
-    @user = User.new(email: 'test@example.com', password: 'password')
+    @department = Department.create(name: 'IT')
+    @user = User.new(email: 'test@example.com', password: 'password', department_id: @department.id)
     @user.skip_confirmation!
     @user.save
 
-    @admin = User.new(email: 'admin@example.com', password: 'password', admin?: true)
+    @admin = User.new(email: 'admin@example.com', password: 'password', admin?: true, department_id: @department.id)
     @admin.skip_confirmation!
     @admin.save
   end
