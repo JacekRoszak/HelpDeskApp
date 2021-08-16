@@ -396,9 +396,6 @@ GEM
     tilt (2.0.10)
     turbo-rails (0.7.0)
       rails (>= 6.0.0)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     twitter-bootstrap-rails (3.2.2)
       actionpack (>= 3.1)
       execjs (>= 2.2.2, >= 2.2)
@@ -461,7 +458,6 @@ DEPENDENCIES
   slim-rails
   spring
   therubyracer
-  turbolinks (~> 5)
   twitter-bootstrap-rails
   tzinfo-data
   web-console (>= 4.1.0)

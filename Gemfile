@@ -31,7 +31,6 @@ gem 'sidekiq'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'therubyracer'
-gem 'turbolinks', '~> 5'
 gem 'twitter-bootstrap-rails'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'webpacker', '~> 5.0'
