@@ -11,8 +11,11 @@ class Ability
     if logged_in
       if admin
         can :manage, :all
+      else
+        can :manage, ServiceRequest, user_id: user.id
+        can :read, ServiceRequest, department_id: user.department_id
       end
-    # else
+    # else token!
     end
   end
 end

@@ -1,0 +1,11 @@
+= simple_form_for @service_request, html: { class: "form-horizontal" } do |f|
+  = f.input :name
+  = f.association :request_status
+  = f.hidden_field :user_id, value: current_user.id
+  = f.association :location
+  = f.input :important
+  = f.input :raport
+  = f.association :department
+  = f.button :submit, class: 'btn-primary'
+  '
+  = link_to t('.cancel', default: t("helpers.links.cancel")), service_requests_path, class: 'btn btn-default'

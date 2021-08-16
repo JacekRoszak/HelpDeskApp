@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_16_082717) do
+ActiveRecord::Schema.define(version: 2021_08_16_115015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,23 @@ ActiveRecord::Schema.define(version: 2021_08_16_082717) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "service_requests", force: :cascade do |t|
+    t.text "name"
+    t.bigint "request_status_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "location_id", null: false
+    t.datetime "closed_at"
+    t.boolean "important"
+    t.text "raport"
+    t.bigint "department_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_service_requests_on_department_id"
+    t.index ["location_id"], name: "index_service_requests_on_location_id"
+    t.index ["request_status_id"], name: "index_service_requests_on_request_status_id"
+    t.index ["user_id"], name: "index_service_requests_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,10 +93,17 @@ ActiveRecord::Schema.define(version: 2021_08_16_082717) do
     t.boolean "otp_required_for_login"
     t.boolean "admin?", default: false
     t.string "token"
+    t.bigint "department_id", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["department_id"], name: "index_users_on_department_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "service_requests", "departments"
+  add_foreign_key "service_requests", "locations"
+  add_foreign_key "service_requests", "request_statuses"
+  add_foreign_key "service_requests", "users"
+  add_foreign_key "users", "departments"
 end

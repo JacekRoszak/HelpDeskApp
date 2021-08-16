@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin panel' do
+RSpec.feature 'Admin panel' do
   before do
     @user = User.new(email: 'test@example.com', password: 'password')
     @user.skip_confirmation!
