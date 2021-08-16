@@ -1,24 +1,5 @@
-# README
+Helpdesk app made for showing my programming skills to potential emplayers. 
+This is a bussiness app for managing service requests. Basiclly it give users a way to request a service from a technicians. They make a request that technicians see in a list. Technicians can assign themselves to this request, change its status and write a raport. User will be informed about every action happening in his request by email.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+App uses Ruby 3.0.0
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
