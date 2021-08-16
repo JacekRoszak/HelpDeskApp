@@ -4,6 +4,9 @@ class User < ApplicationRecord
          :two_factor_authenticatable,
          otp_secret_encryption_key: ENV['OTP_KEY']
 
+  # Token for autologin from link in notification email
+  has_secure_token
+
   before_create :default_values
   def default_values
     self.otp_required_for_login = false
