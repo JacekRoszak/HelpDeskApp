@@ -2,21 +2,10 @@ require 'rails_helper'
 
 RSpec.feature 'User authentication' do
   before do
-    @user = User.new(email: 'test@example.com', password: 'password')
+    @department = Department.create!(name: 'IT')
+    @user = User.new(email: 'test@example.com', password: 'password', department_id: @department.id)
     @user.skip_confirmation!
     @user.save
-  end
-
-  def give_valid_credentials
-    fill_in 'user[email]', with: 'test@example.com'
-    fill_in 'user[password]', with: 'password'
-    fill_in 'user[password_confirmation]', with: 'password'
-  end
-
-  def give_invalid_credentials
-    fill_in 'user[email]', with: ''
-    fill_in 'user[password]', with: ''
-    fill_in 'user[password_confirmation]', with: ''
   end
 
   scenario 'User forgets his password' do
@@ -26,49 +15,6 @@ RSpec.feature 'User authentication' do
     fill_in 'user[email]', with: 'test@example.com'
     click_button 'Send me reset password instructions'
     expect(page).to have_content('You will receive an email with instructions on how to reset your password in a few minutes.')
-  end
-
-  context 'Sign up' do
-    before do
-      visit '/'
-      click_link 'Sign up'
-    end
-
-    scenario 'with valid credentials' do
-      @user.destroy
-
-      give_valid_credentials
-      click_button 'Sign up'
-
-      expect(page).to have_content('A message with a confirmation link has been sent to your email address.')
-      expect(page).to have_link('Sign up')
-      expect(page).to have_link('Sign in')
-    end
-
-    scenario 'without giving credentials' do
-      give_invalid_credentials
-
-      click_button 'Sign up'
-
-      expect(page).to have_content("Email can't be blank")
-      expect(page).to have_content("Password can't be blank")
-      expect(page).not_to have_link('Sign out')
-      expect(page).to have_link('Sign in')
-      expect(page).to have_link('Sign up')
-    end
-
-    scenario 'with used credentials' do
-      give_invalid_credentials
-      fill_in 'user[email]', with: @user.email
-
-      click_button 'Sign up'
-
-      expect(page).to have_content('Email has already been taken')
-      expect(page).to have_content("Password can't be blank")
-      expect(page).not_to have_link('Sign out')
-      expect(page).to have_link('Sign in')
-      expect(page).to have_link('Sign up')
-    end
   end
 
   context 'Sign in' do
