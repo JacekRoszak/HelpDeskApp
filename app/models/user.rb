@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # Token for autologin from link in notification email
   has_secure_token
+  has_many :service_requests, dependent: :destroy
 
   before_create :default_values
   def default_values

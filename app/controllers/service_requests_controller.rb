@@ -8,23 +8,19 @@ class ServiceRequestsController < ApplicationController
   def show
   end
 
-  def new
-  end
-
-  def edit
-  end
+  def edit;end
 
   def create
     if @service_request.save
-      redirect_to @service_request, notice: 'Service request was successfully created.'
+      redirect_to service_requests_path
     else
-      render :new
+      render turbo_stream: turbo_stream.replace(@service_request, partial: 'service_requests/form')
     end
   end
 
   def update
     if @service_request.update(service_request_params)
-      redirect_to @service_request, notice: 'Service request was successfully updated.'
+      redirect_to @service_request
     else
       render :edit
     end
@@ -32,7 +28,7 @@ class ServiceRequestsController < ApplicationController
 
   def destroy
     @service_request.destroy
-    redirect_to service_requests_url, notice: 'Service request was successfully destroyed.'
+    redirect_to service_requests_url
   end
 
   private

@@ -14,7 +14,9 @@ nav#navbar-main.navbar.navbar-expand-lg.navbar-dark.bg-warm-dark
             = link_to 'Forget your password?', new_password_path(:user), class: 'nav-link'
         - else  
           li.nav-item
-            = link_to 'Profile', edit_user_registration_path(nav: 'Profile'), class: 'nav-link'
+            = link_to 'Service Requests', service_requests_path, class: 'nav-link'
+          li.nav-item
+            = link_to 'Profile', edit_user_registration_path, class: 'nav-link'
           li.nav-item
             = link_to  "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link'
             

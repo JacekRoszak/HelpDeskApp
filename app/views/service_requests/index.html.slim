@@ -1,9 +1,11 @@
-.page-header
+= turbo_stream_from 'service_requests'
+
+= turbo_frame_tag 'service_request_form' do
+  = render 'service_requests/form'
+
+.page-header.text-center
   h1 = t '.title'
 
-= render 'service_requests/form'
-
-br
 .d-none.d-md-block
   .row
     .col-sm-2.d-flex.justify-content-center
@@ -18,6 +20,5 @@ br
       | Destination
     .col-sm-2.d-flex.justify-content-center
 
-
-
-= render @service_requests
+= turbo_frame_tag 'service_requests' do
+  = render @service_requests

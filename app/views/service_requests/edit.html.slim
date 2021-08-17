@@ -1,4 +1,2 @@
-- model_class = ServiceRequest
-.page-header
-  h1=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize
-= render :partial => "form"
+= turbo_frame_tag @service_request do
+	= render 'form', service_request: @service_request
