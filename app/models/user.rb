@@ -7,6 +7,7 @@ class User < ApplicationRecord
   # Token for autologin from link in notification email
   has_secure_token
   has_many :service_requests, dependent: :destroy
+  belongs_to :department
 
   before_create :default_values
   def default_values
@@ -26,5 +27,9 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def technician?
+    department.technicians?
   end
 end

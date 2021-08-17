@@ -2,13 +2,13 @@ class ServiceRequestsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    # @service_requests = ServiceRequest.main_scope
     @service_request = ServiceRequest.new
   end
 
-  def show
-  end
+  def show; end
 
-  def edit;end
+  def edit; end
 
   def create
     if @service_request.save
