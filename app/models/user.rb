@@ -6,18 +6,27 @@ class User < ApplicationRecord
 
   # Token for autologin from link in notification email
   has_secure_token
-  has_many :service_requests, dependent: :destroy
   belongs_to :department
+
+  # Requests made by user
+  has_many :made_requests, class_name: 'ServiceRequest', foreign_key: 'user_id', dependent: :destroy
+
+  # Requests assignes to the technician
+  has_many :service_request_technicians
+  has_many :assigned_requests, through: :service_request_technicians, source: :service_request
 
   before_create :default_values
   def default_values
+    # Possible to change default value of 2fa requirement
     self.otp_required_for_login = false
   end
 
+  # Overwrite devise method for background job
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
   end
 
+  # generate qr code for 2fa
   def otp_qr_code
     issuer = 'HelpDesk'
     label = "#{issuer}:#{email}"

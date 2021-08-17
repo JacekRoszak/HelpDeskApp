@@ -4,6 +4,9 @@ class ServiceRequest < ApplicationRecord
   belongs_to :location
   belongs_to :department
 
+  has_many :service_request_technicians
+  has_many :technicians, through: :service_request_technicians, source: :user
+
   validates :name, presence: true
 
   after_create_commit  { broadcast_prepend_to 'service_requests' }
