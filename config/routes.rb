@@ -1,8 +1,13 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :service_requests
+  resources :service_requests do
+    patch 'assign_technician', to: 'service_requests#assign_technician'
+  end
+  resource :two_factor
+
   ActiveAdmin.routes(self)
+
   get 'pages/home'
   get 'pages/about'
 
@@ -12,7 +17,6 @@ Rails.application.routes.draw do
       post 'pre_otp', to: 'sessions#pre_otp'
     end
   end
-  resource :two_factor
 
   root 'pages#home'
 

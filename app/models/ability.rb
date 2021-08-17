@@ -17,6 +17,7 @@ class Ability
         # Technician can read a request, if it was send to his department
         if user.technician?
           can :read, ServiceRequest, department_id: user.department_id
+          can :assign_technician, ServiceRequest, department_id: user.department_id
         end
       end
     # else token!
