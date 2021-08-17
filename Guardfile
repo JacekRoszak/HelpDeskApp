@@ -26,9 +26,9 @@ cucumber_options = {
   # keep_failed: false,
   # feature_sets: ['features/frontend', 'features/experimental'],
 
-  # run_all: { cmd_additional_args: '--profile guard_all' },
+  # run_all: { cmd_additional_args: "--format pretty" },
   # focus_on: { 'wip' }, # @wip
-  # notification: false
+  notification: false
 }
 
 guard "cucumber", cucumber_options do
