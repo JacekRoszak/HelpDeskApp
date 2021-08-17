@@ -31,6 +31,6 @@
       = link_to t('.edit', :default => t("helpers.links.edit")), edit_service_request_path(service_request), class: 'btn btn-warning btn-sm me-2'
       = link_to t('.destroy', :default => t("helpers.links.destroy")), service_request_path(service_request), method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class: 'btn btn-sm btn-danger'
   .row.pt-2.table-row-bottom style="color: #{service_request.request_status.color};background-color:#{service_request.request_status.background};"
-    .col-sm-12.d-flex.justify-content-center.p-2 style='align-items:center;border-top:1px solid #404040'
+    .col-sm-12.d-flex.justify-content-center.p-2 style='align-items:center;border-top:1px solid #303030'
       .text-muted
         = service_request.name
