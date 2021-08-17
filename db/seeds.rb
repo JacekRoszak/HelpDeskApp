@@ -1,19 +1,19 @@
 puts 'Destroing'
 ServiceRequest.destroy_all
 # User.destroy_all
-# RequestStatus.destroy_all
+RequestStatus.destroy_all
 # Department.destroy_all
 # Location.destroy_all
 
-# puts 'Request Status'
-# [
-#   { name: 'Waiting', color: '#f0ad4e', background: '#222225' },
-#   { name: 'Assigned', color: '#5bc0de', background: '#222225' },
-#   { name: 'In progress', color: '#0275d8', background: '#222225' },
-#   { name: 'On hold', color: '', background: '' },
-#   { name: 'Finished', color: '#5cb85c', background: '' },
-#   { name: 'Cancelled', color: '#b5b5b5', background: '' }
-# ].each { |status_params| RequestStatus.create!(status_params) }
+puts 'Request Status'
+[
+  { name: 'Waiting', color: '#f0ad4e', background: '#18181A' },
+  { name: 'Assigned', color: '#5bc0de', background: '#18181A' },
+  { name: 'In progress', color: '#0275d8', background: '#18181A' },
+  { name: 'On hold', color: '', background: '' },
+  { name: 'Finished', color: '#5cb85c', background: '' },
+  { name: 'Cancelled', color: '#b5b5b5', background: '' }
+].each { |status_params| RequestStatus.create!(status_params) }
 
 # puts 'Departments'
 # [
