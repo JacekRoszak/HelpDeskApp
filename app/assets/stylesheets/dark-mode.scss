@@ -12,3 +12,8 @@ body {
 .edit-profile {
   max-width: 700px;
 }
+
+.my-table-centered {
+  @extend .d-flex, .justify-content-center;
+  align-items:center;
+}
