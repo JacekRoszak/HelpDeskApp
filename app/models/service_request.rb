@@ -23,4 +23,8 @@ class ServiceRequest < ApplicationRecord
   def status
     request_status.name
   end
+
+  def colors
+    "color: #{request_status.color};background-color:#{request_status.background};"
+  end
 end
