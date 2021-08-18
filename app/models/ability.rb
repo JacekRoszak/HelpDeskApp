@@ -18,6 +18,8 @@ class Ability
         if user.technician?
           can :read, ServiceRequest, department_id: user.department_id
           can :assign_technician, ServiceRequest, department_id: user.department_id
+        else
+          cannot :assign_technician, ServiceRequest
         end
       end
     # else token!

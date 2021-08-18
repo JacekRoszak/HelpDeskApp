@@ -14,8 +14,13 @@ class ServiceRequestsController < ApplicationController
   def edit
   end
 
+  def add_buttons
+    @service_request = ServiceRequest.find(params[:service_request_id])
+    render 'add_buttons.js.slim'
+  end
+
   def assign_technician
-    
+
   end
 
   def create
