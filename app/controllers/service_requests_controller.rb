@@ -20,7 +20,14 @@ class ServiceRequestsController < ApplicationController
   end
 
   def assign_technician
+    @service_request = ServiceRequest.find(params[:service_request_id])
+    @service_request.technicians << current_user
+    @service_request.check_taken_status
+    render turbo_stream: turbo_stream.replace(@service_request)
+  end
 
+  def process_request
+    @service_request = ServiceRequest.find(params[:service_request_id])
   end
 
   def create

@@ -27,4 +27,10 @@ class ServiceRequest < ApplicationRecord
   def colors
     "color: #{request_status.color};background-color:#{request_status.background};"
   end
+
+  def check_taken_status
+    if request_status.id == RequestStatus.all[0].id
+      update(request_status_id: RequestStatus.all[1].id)
+    end
+  end
 end

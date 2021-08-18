@@ -1,5 +1,8 @@
 - if can? :assign_technician, @service_request
-  = link_to 'take', service_request_assign_technician_path(@service_request), class: 'btn btn-primary btn-sm m-1', id: 'assign'
+  - if current_user.in? @service_request.technicians
+    = link_to 'process', service_request_process_path(service_request_id: @service_request.id), class: 'btn btn-warning btn-sm m-1'
+  - else
+    = link_to 'take', service_request_assign_technician_path(service_request_id: @service_request.id), class: 'btn btn-primary btn-sm m-1', id: 'assign'
 - if can? :edit, @service_request
   = link_to edit_service_request_path(service_request), class: 'btn btn-warning btn-sm m-1', id: 'edit' do
     i class="bi bi-pencil-square"

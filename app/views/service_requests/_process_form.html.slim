@@ -1,0 +1,13 @@
+= simple_form_for @service_request, html: { class: "form-horizontal" } do |f|
+  .row.dark-mode
+    .col-sm-6
+      = f.input :raport, placeholder: 'Raport', label: false, input_html: { rows: 2, cols: 2}
+    .col-sm-3
+      = f.association :request_status, collection: RequestStatus.all.drop(1), label: false, include_blank: false
+    .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
+      .btn-group
+        - if @service_request.new_record?
+          = f.button :submit, 'add', class: 'btn-success btn btn-sm'
+        - else
+          = f.button :submit, 'save', class: 'btn-success btn btn-sm'
+          = link_to 'cancel', @service_request, class: 'btn btn-warning btn-sm'
