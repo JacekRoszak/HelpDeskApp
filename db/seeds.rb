@@ -1,9 +1,9 @@
 puts 'Destroing'
 ServiceRequest.destroy_all
-# User.destroy_all
+User.destroy_all
 RequestStatus.destroy_all
-# Department.destroy_all
-# Location.destroy_all
+Department.destroy_all
+Location.destroy_all
 
 puts 'Request Status'
 [
@@ -15,41 +15,41 @@ puts 'Request Status'
   { name: 'Cancelled', color: '#b5b5b5', background: '' }
 ].each { |status_params| RequestStatus.create!(status_params) }
 
-# puts 'Departments'
-# [
-#   { name: 'IT' },
-#   { name: 'Electrics' },
-#   { name: 'Mechanics' },
-#   { name: 'Bookkeepers' },
-#   { name: 'HR' },
-#   { name: 'Sales' },
-#   { name: 'Supply' },
-#   { name: 'Production' }
-# ].each { |department_params| Department.create!(department_params) }
+puts 'Departments'
+[
+  { name: 'IT', technicians?: true },
+  { name: 'Electrics' },
+  { name: 'Mechanics' },
+  { name: 'Bookkeepers' },
+  { name: 'HR' },
+  { name: 'Sales' },
+  { name: 'Supply' },
+  { name: 'Production' }
+].each { |department_params| Department.create!(department_params) }
 
-# puts 'Locations'
-# [
-#   { name: 'IT office' },
-#   { name: 'Electrics workshop' },
-#   { name: 'Mechanics' },
-#   { name: 'Bookkeeping' },
-#   { name: 'Gate nr1' },
-#   { name: 'Gate nr2' },
-#   { name: 'Production hal nr 1' },
-#   { name: 'Production' }
-# ].each { |location_params| Location.create!(location_params) }
+puts 'Locations'
+[
+  { name: 'IT office' },
+  { name: 'Electrics workshop' },
+  { name: 'Mechanics' },
+  { name: 'Bookkeeping' },
+  { name: 'Gate nr1' },
+  { name: 'Gate nr2' },
+  { name: 'Production hal nr 1' },
+  { name: 'Production' }
+].each { |location_params| Location.create!(location_params) }
 
-# puts 'Users'
-# [
-#   { email: 'admin@gmail.com', first_name: 'admin', last_name: 'admiński', password: 'admin123', department_id: Department.find_by(name:'IT').id, admin?: true },
-#   { email: 'user@gmail.com', first_name: 'Adam', last_name: 'Nowak', password: 'user123', department_id: Department.find_by(name:'HR').id },
-#   { email: 'it@gmail.com', first_name: 'Robert', last_name: 'Lewandowski', password: 'user123', department_id: Department.find_by(name:'IT').id },
-#   { email: 'user2@gmail.com', first_name: 'Krzysiek', last_name: 'Kowalski', password: 'user123', department_id: Department.find_by(name:'HR').id }
-# ].each do |user_params|
-#   user = User.new(user_params)
-#   user.skip_confirmation!
-#   user.save
-# end
+puts 'Users'
+[
+  { email: 'admin@gmail.com', first_name: 'admin', last_name: 'admiński', password: 'admin123', department_id: Department.find_by(name:'IT').id, admin?: true },
+  { email: 'user@gmail.com', first_name: 'Adam', last_name: 'Nowak', password: 'user123', department_id: Department.find_by(name:'HR').id },
+  { email: 'it@gmail.com', first_name: 'Robert', last_name: 'Lewandowski', password: 'user123', department_id: Department.find_by(name:'IT').id },
+  { email: 'user2@gmail.com', first_name: 'Krzysiek', last_name: 'Kowalski', password: 'user123', department_id: Department.find_by(name:'HR').id }
+].each do |user_params|
+  user = User.new(user_params)
+  user.skip_confirmation!
+  user.save
+end
 
 puts 'Requests'
 [
