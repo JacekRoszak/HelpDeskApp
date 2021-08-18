@@ -1,11 +1,11 @@
-- if can? :assign_technician, @service_request
+- if can? :take_request, @service_request
   - if current_user.in? @service_request.technicians
-    = link_to 'process', service_request_process_path(service_request_id: @service_request.id), class: 'btn btn-warning btn-sm m-1'
+    = link_to 'process', edit_service_request_path(service_request), class: 'btn btn-warning btn-sm m-1', id: 'edit' 
   - else
-    = link_to 'take', service_request_assign_technician_path(service_request_id: @service_request.id), class: 'btn btn-primary btn-sm m-1', id: 'assign'
-- if can? :edit, @service_request
+    = link_to 'take', service_request_take_request_path(@service_request), class: 'btn btn-primary btn-sm m-1'
+- if can? :edit_his_req_params, @service_request
   = link_to edit_service_request_path(service_request), class: 'btn btn-warning btn-sm m-1', id: 'edit' do
     i class="bi bi-pencil-square"
-- if can? :delete, @service_request
+- if can? :edit_his_req_params, @service_request
   = link_to service_request_path(service_request), method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class: 'btn btn-sm btn-danger m-1', id: 'delete' do
     i class="bi bi-trash" 

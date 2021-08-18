@@ -2,9 +2,8 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   resources :service_requests do
-    get 'assign_technician', to: 'service_requests#assign_technician'
+    get 'take_request', to: 'service_requests#take_request'
     get 'btn', to: 'service_requests#add_buttons'
-    get 'process', to: 'service_requests#process_request'
   end
   resource :two_factor
 

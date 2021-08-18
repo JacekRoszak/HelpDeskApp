@@ -1,17 +1,32 @@
 = simple_form_for @service_request, html: { class: "form-horizontal" } do |f|
-  .row.dark-mode
-    .col-sm-6
-      = f.input :name, placeholder: 'New request', label: false, input_html: { rows: 2, cols: 2}
-    .col-sm-3
-      = f.hidden_field :request_status_id, value: @service_request.request_status_id || RequestStatus.first&.id
-      = f.hidden_field :user_id, value: current_user.id
-      = f.association :location, label: false, include_blank: 'Location'
-      = f.association :department, collection: Department.technicians, label: false, include_blank: 'Destination'
-    .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
-      = f.input :important, class:'form-check-input', input_html: { id: "#{(0...50).map { ('a'..'z').to_a[rand(26)] }.join}" }
-      .btn-group
-        - if @service_request.new_record?
-          = f.button :submit, 'add', class: 'btn-success btn btn-sm'
-        - else
-          = f.button :submit, 'save', class: 'btn-success btn btn-sm'
-          = link_to 'cancel', @service_request, class: 'btn btn-warning btn-sm'
+  - if (can? :edit, @service_request) || @service_request.new_record?
+    .row.dark-mode
+      .col-sm-6
+        = f.input :name, placeholder: 'New request', label: false, input_html: { rows: 2, cols: 2}
+      .col-sm-3
+        = f.hidden_field :request_status_id, value: @service_request.request_status_id || RequestStatus.first&.id
+        = f.hidden_field :user_id, value: current_user.id
+        = f.association :location, label: false, include_blank: 'Location'
+        = f.association :department, collection: Department.technicians, label: false, include_blank: 'Destination'
+      .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
+        = f.input :important, class:'form-check-input', input_html: { id: "#{(0...50).map { ('a'..'z').to_a[rand(26)] }.join}" }
+        .btn-group
+          - if @service_request.new_record?
+            = f.button :submit, 'add', class: 'btn-success btn btn-sm'
+          - else
+            = f.button :submit, 'save', class: 'btn-success btn btn-sm'
+            = link_to 'cancel', @service_request, class: 'btn btn-warning btn-sm'
+  - if ((can? :take_request, @service_request) && (@service_request.technicians.include? current_user))
+    .row.dark-mode
+      .col-sm-6
+        = f.input :raport, placeholder: 'Raport', label: false, input_html: { rows: 2, cols: 2}
+      .col-sm-3
+        = f.association :request_status, collection: RequestStatus.all.drop(1), label: false, include_blank: false
+      - if !((can? :edit, @service_request) || @service_request.new_record?)
+        .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
+          .btn-group
+            - if @service_request.new_record?
+              = f.button :submit, 'add', class: 'btn-success btn btn-sm'
+            - else
+              = f.button :submit, 'save', class: 'btn-success btn btn-sm'
+              = link_to 'cancel', @service_request, class: 'btn btn-warning btn-sm'

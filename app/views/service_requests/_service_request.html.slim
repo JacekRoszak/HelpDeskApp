@@ -22,6 +22,9 @@
         | status
       .mx-1
         = service_request.status
+        br
+        small.text-muted
+          small #{service_request.technicians_initials}
     .col-sm-2.my-table-centered
       .d-block.d-sm-none.text-muted
         | destination
@@ -29,6 +32,10 @@
       = service_request.department.name
     .col-sm-2.my-table-centered id="sr#{service_request.id}"
   .row.pt-2.table-row-bottom style="#{service_request.colors}"
-    .col-sm-12.my-table-centered.p-2 style='border-top:1px solid #303030'
+    .col-sm-12.p-2.text-start style='border-top:1px solid #303030'
       .text-muted
-        = service_request.name
+        | description: #{service_request.name}
+    - if !service_request.raport.blank?
+      .col-sm-12.p-2.text-start
+        .text-muted.text-start
+          | raport: #{simple_format(service_request.raport)}

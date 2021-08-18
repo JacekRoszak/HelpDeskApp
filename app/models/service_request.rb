@@ -9,6 +9,7 @@ class ServiceRequest < ApplicationRecord
 
   validates :name, presence: true
 
+  # broadcasts
   after_create_commit  { broadcast_prepend_to 'service_requests' }
   after_update_commit  { broadcast_replace_to 'service_requests' }
   after_destroy_commit { broadcast_remove_to 'service_requests'  }
@@ -33,4 +34,12 @@ class ServiceRequest < ApplicationRecord
       update(request_status_id: RequestStatus.all[1].id)
     end
   end
+
+  def technicians_initials
+    initials = ''
+    technicians.each { |t| initials+= "#{t.first_name[0]}.#{t.last_name[0]}. " }
+    initials += ''
+    initials
+  end
+  
 end
