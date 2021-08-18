@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'pages#home'
+  root 'service_requests#index'
 
   mount Sidekiq::Web, at: '/sidekiq'
 end
