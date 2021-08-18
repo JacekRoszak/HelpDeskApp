@@ -10,6 +10,8 @@
     .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
         = f.input :important, class:'form-check-input'
         .btn-group
-          = f.button :submit, 'Add', class: 'btn-success btn btn-sm'
-          - unless @service_request.new_record?
-            = link_to 'Cancel', @service_request, class: 'btn btn-warning btn-sm'
+          - if @service_request.new_record?
+            = f.button :submit, 'add', class: 'btn-success btn btn-sm'
+          - else
+            = f.button :submit, 'save', class: 'btn-success btn btn-sm'
+            = link_to 'cancel', @service_request, class: 'btn btn-warning btn-sm'
