@@ -16,10 +16,8 @@ class Ability
         can [:manage, :edit_his_req_params], ServiceRequest, user_id: user.id
         # Technician can read a request, if it was send to his department
         if user.technician?
-          can [:read,:edit], ServiceRequest, department_id: user.department_id
+          can [:read, :edit, :update], ServiceRequest, department_id: user.department_id
           can :take_request, ServiceRequest, department_id: user.department_id
-        else
-          cannot :take_request, ServiceRequest
         end
       end
     # else token!

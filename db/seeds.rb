@@ -7,12 +7,12 @@ Location.destroy_all
 
 puts 'Request Status'
 [
-  { name: 'Waiting', color: '#f0ad4e', background: '#18181A' },
-  { name: 'Assigned', color: '#5bc0de', background: '#18181A' },
-  { name: 'In progress', color: '#0275d8', background: '#18181A' },
-  { name: 'On hold', color: '', background: '' },
-  { name: 'Finished', color: '#5cb85c', background: '' },
-  { name: 'Cancelled', color: '#b5b5b5', background: '' }
+  { name: 'Waiting' },
+  { name: 'Assigned' },
+  { name: 'In progress' },
+  { name: 'On hold' },
+  { name: 'Finished' },
+  { name: 'Cancelled' }
 ].each { |status_params| RequestStatus.create!(status_params) }
 
 puts 'Departments'
@@ -64,3 +64,5 @@ puts 'Requests'
   { name: 'There is a new guy in our department. Please create a domain accout for him.',
     request_status_id: RequestStatus.all[4].id, user_id: User.all[1].id, location_id: Location.all.sample.id, department_id: Department.find_by(name: 'IT').id }
 ].each { |sr_params| ServiceRequest.create! sr_params }
+
+puts 'End'

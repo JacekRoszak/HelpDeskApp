@@ -5,11 +5,10 @@ class ServiceRequest < ApplicationRecord
   belongs_to :department
 
   has_many :service_request_technicians
-  has_many :technicians, through: :service_request_technicians, source: :user
+  has_many :technicians, through: :service_request_technicians, source: :user, dependent: :destroy
 
   validates :name, presence: true
 
-  # broadcasts
   after_create_commit  { broadcast_prepend_to 'service_requests' }
   after_update_commit  { broadcast_replace_to 'service_requests' }
   after_destroy_commit { broadcast_remove_to 'service_requests'  }
@@ -23,9 +22,44 @@ class ServiceRequest < ApplicationRecord
     request_status.name
   end
 
-  def colors
-    "color: #{ important ? '#d9534f' : request_status.color};background-color:#{request_status.background};"
+  def color
+    case request_status.id
+    when RequestStatus.first.id
+      'badge bg-warning text-dark'
+    when RequestStatus.all[1].id
+      'badge bg-info text-dark'
+    when RequestStatus.all[2].id
+      'badge bg-primary'
+    when RequestStatus.all[3].id
+      'badge bg-secondary'
+    when RequestStatus.all[4].id
+      'badge bg-success'
+    else
+      'badge bg-danger'
+    end
   end
+
+  def background
+    if important?
+      '#d9534f'
+    else
+      case request_status.id
+      when RequestStatus.first.id
+        '#18181A'
+      when RequestStatus.all[1].id
+        '#18181A'
+      when RequestStatus.all[2].id
+        '#18181A'
+      when RequestStatus.all[3].id
+        '#18181A'
+      when RequestStatus.all[4].id
+        ''
+      else
+        ''
+      end
+    end
+  end
+  
 
   def check_taken_status
     if request_status.id == RequestStatus.all[0].id

@@ -15,9 +15,24 @@ nav#navbar-main.navbar.navbar-expand-lg.navbar-dark.bg-warm-dark
             = link_to 'Service Requests', service_requests_path, class: 'nav-link'
           - if current_user.admin?
             li.nav-item
-              = link_to 'Admin', admin_root_path, class: 'nav-link'
+              = link_to 'Admin', admin_root_path, class: 'nav-link', data: { turbo: false }
           li.nav-item
             = link_to "Profile(#{current_user.full_name})", edit_user_registration_path, class: 'nav-link'
           li.nav-item
             = link_to  "Sign out", destroy_user_session_path, method: :delete, class: 'nav-link'
             
+/ TODO: raport na pół z opisem
+  ostatnie requesty na home
+  nowi użytwkonicy na home
+  statystyki na home
+  badge na statusy
+  responsywnie marginesy dla sr
+  res rozjeżdża się ststua z inicjałami
+  profil update inny kolor i na dół
+  w adminie dodać department
+  destination widoczne tylko dla tych co widzą więcej niż jedną
+  dodać ikonę do rozwijania tekstu
+  paginacja przy butoonach na qr
+  wizyty
+  notiyfikacje mailem
+  na githubie screeny dodać

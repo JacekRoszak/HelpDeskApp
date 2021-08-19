@@ -11,4 +11,6 @@ Cancancan for managing authorizations.
 Devise with two factor for Users.
 Hotwire and stimulus for broadcasting requests.
 Redis and Sidekiq for background jobs.
-I used albo Sengrida and Slim.
+I used Sengrid and Slim.
+
+There is a seed in db that will provide you with some sample data.

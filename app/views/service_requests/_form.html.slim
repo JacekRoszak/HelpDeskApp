@@ -12,10 +12,10 @@
         = f.input :important, class:'form-check-input', input_html: { id: "#{(0...50).map { ('a'..'z').to_a[rand(26)] }.join}" }
         .btn-group
           - if @service_request.new_record?
-            = f.button :submit, 'add', class: 'btn-success btn btn-sm'
+            = f.button :submit, 'add', class: 'btn-primary btn btn-sm'
           - else
-            = f.button :submit, 'save', class: 'btn-success btn btn-sm'
-            = link_to 'cancel', @service_request, class: 'btn btn-warning btn-sm'
+            = f.button :submit, 'save', class: 'btn-primary btn btn-sm'
+            = link_to 'cancel', @service_request, class: 'btn btn-primary btn-sm'
   - if ((can? :take_request, @service_request) && (@service_request.technicians.include? current_user)) && params[:btn] == 'process'
     .row.dark-mode
       .col-sm-6
@@ -26,7 +26,7 @@
         .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
           .btn-group
             - if @service_request.new_record?
-              = f.button :submit, 'add', class: 'btn-success btn btn-sm'
+              = f.button :submit, 'add', class: 'btn-primary btn btn-sm'
             - else
-              = f.button :submit, 'save', class: 'btn-success btn btn-sm'
-              = link_to 'cancel', @service_request, class: 'btn btn-warning btn-sm'
+              = f.button :submit, 'save', class: 'btn-primary btn btn-sm'
+              = link_to 'cancel', @service_request, class: 'btn btn-primary btn-sm'
