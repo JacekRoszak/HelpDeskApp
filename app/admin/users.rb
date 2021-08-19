@@ -1,11 +1,11 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :first_name, :last_name, :cell_number, :work_number, :inner_number
+  permit_params :email, :password, :password_confirmation, :first_name, :last_name, :cell_number, :work_number, :inner_number, :admin?, :department_id
 
   index do
     selectable_column
     column :full_name
     column :email
-    column :last_sign_in_at
+    column :admin?
     actions
   end
 
@@ -24,9 +24,13 @@ ActiveAdmin.register User do
   end
 
   form do |f|
+    f.semantic_errors
+    f.object.errors.keys
     f.input :first_name
     f.input :last_name
     f.input :email
+    f.input :department
+    f.input :admin?
     f.input :password
     f.input :password_confirmation
     actions
