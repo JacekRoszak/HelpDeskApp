@@ -1,5 +1,5 @@
 = simple_form_for @service_request, html: { class: "form-horizontal" } do |f|
-  - if (can? :edit, @service_request) || @service_request.new_record?
+  - if (((can? :edit_his_req_params, @service_request) || @service_request.new_record?) && params[:btn] != 'process' )
     .row.dark-mode
       .col-sm-6
         = f.input :name, placeholder: 'New request', label: false, input_html: { rows: 2, cols: 2}
@@ -16,13 +16,13 @@
           - else
             = f.button :submit, 'save', class: 'btn-success btn btn-sm'
             = link_to 'cancel', @service_request, class: 'btn btn-warning btn-sm'
-  - if ((can? :take_request, @service_request) && (@service_request.technicians.include? current_user))
+  - if ((can? :take_request, @service_request) && (@service_request.technicians.include? current_user)) && params[:btn] == 'process'
     .row.dark-mode
       .col-sm-6
         = f.input :raport, placeholder: 'Raport', label: false, input_html: { rows: 2, cols: 2}
       .col-sm-3
         = f.association :request_status, collection: RequestStatus.all.drop(1), label: false, include_blank: false
-      - if !((can? :edit, @service_request) || @service_request.new_record?)
+      - if !(((can? :edit_his_req_params, @service_request) || @service_request.new_record?)&& params[:btn] != 'process' )
         .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
           .btn-group
             - if @service_request.new_record?

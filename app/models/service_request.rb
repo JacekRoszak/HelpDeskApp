@@ -14,9 +14,7 @@ class ServiceRequest < ApplicationRecord
   after_update_commit  { broadcast_replace_to 'service_requests' }
   after_destroy_commit { broadcast_remove_to 'service_requests'  }
 
-  default_scope -> { order('request_status_id', 'service_requests.updated_at desc') }
-  # .where.not('request_status_id IN (5,6) AND service_requests.updated_at < ?', 2.days.ago)
-
+  default_scope -> { order('request_status_id', 'service_requests.updated_at desc').where.not('request_status_id IN (5,6) AND service_requests.updated_at < ?', 2.days.ago) }
   def owner
     user.full_name
   end

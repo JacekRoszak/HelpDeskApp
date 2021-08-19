@@ -1,6 +1,6 @@
 - if can? :take_request, @service_request
   - if current_user.in? @service_request.technicians
-    = link_to 'process', edit_service_request_path(service_request), class: 'btn btn-warning btn-sm m-1', id: 'edit' 
+    = link_to 'process', edit_service_request_path(service_request, btn: 'process'), class: 'btn btn-warning btn-sm m-1', id: 'edit' 
   - else
     = link_to 'take', service_request_take_request_path(@service_request), class: 'btn btn-primary btn-sm m-1'
 - if can? :edit_his_req_params, @service_request
