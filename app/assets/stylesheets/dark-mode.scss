@@ -17,3 +17,9 @@ body {
   @extend .d-flex, .justify-content-center;
   align-items:center;
 }
+
+.restrict_text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 50px;
+}

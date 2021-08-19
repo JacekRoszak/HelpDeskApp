@@ -31,7 +31,7 @@
       .mx-1
       = service_request.department.name
     .col-sm-2.my-table-centered id="sr#{service_request.id}"
-  .row.pt-2.table-row-bottom style="#{service_request.colors}"
+  .row.pt-2.px-3.table-row-bottom.restrict_text.text-to-reveal style="#{service_request.colors}"
     .col-sm-12.p-2.text-start style='border-top:1px solid #303030'
       .text-muted
         | description: #{service_request.name}

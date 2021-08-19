@@ -26,7 +26,7 @@ class ServiceRequest < ApplicationRecord
   end
 
   def colors
-    "color: #{ important ? '#d9534f' : request_status.color};background-color:#{request_status.background};#{ important ? 'font-weight: bold;' : ''}"
+    "color: #{ important ? '#d9534f' : request_status.color};background-color:#{request_status.background};"
   end
 
   def check_taken_status
