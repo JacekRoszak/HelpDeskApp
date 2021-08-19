@@ -14,3 +14,17 @@ Redis and Sidekiq for background jobs.
 I used Sengrid and Slim.
 
 There is a seed in db that will provide you with some sample data.
+
+https://jackshelpdesk.herokuapp.com
+
+Regular user:
+user@gmail.com
+user123
+
+It technician:
+it@gmail.com
+user123
+
+Admin:
+admin@gmail.com
+admin123
