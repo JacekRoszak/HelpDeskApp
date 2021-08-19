@@ -33,13 +33,13 @@
     .col-sm-2.my-table-centered id="sr#{service_request.id}"
   .row.pt-2.px-3.table-row-bottom.restrict_text.text-to-reveal  style="background-color:#{service_request.background};"
     - if service_request.raport.blank?
-      .col-sm-12.p-2.text-start style='border-top:1px solid #303030'
+      .col-sm-12.p-2.text-start style='border-top:1px solid #303030;'
         .text-muted
           = simple_format(service_request.name)
     - else
-      .col-sm-6.p-2.text-start style='border-top:1px solid #303030'
+      .col-sm-6.p-2.text-start style='border-top:1px solid #303030;'
         .text-muted
           = simple_format(service_request.name)
-      .col-sm-6.p-2.text-start style='border-top:1px solid #303030'
+      .col-sm-6.p-2.text-start style='border-top:1px solid #303030;border-left:1px solid #303030;'
         .text-muted.text-start
           = simple_format(service_request.raport)
