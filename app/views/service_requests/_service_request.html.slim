@@ -1,5 +1,5 @@
 = turbo_frame_tag service_request do
-  .row.pt-2.px-2.table-row-top.text-center.mt-2 data-controller='requests' style="background-color:#{service_request.background};" data-requests-url-value="#{service_request_btn_path(service_request_id: service_request.id)}"
+  .row.pt-2.px-2.table-row-top.text-center.mt-2 data-controller='requests' style="background-color:#{service_request.background};#{ service_request.important? ? 'border-color:#d9534f' : ''};" data-requests-url-value="#{service_request_btn_path(service_request_id: service_request.id)}"
     .col-sm-2.my-table-centered
       .d-block.d-sm-none.text-muted
         | Created
@@ -22,16 +22,13 @@
         | status
       .mx-1 class="#{service_request.color}"
         = service_request.status
-        / br
-        / small.text-muted
-        /   small #{service_request.technicians_initials}
     .col-sm-2.my-table-centered
       .d-block.d-sm-none.text-muted
         | destination
       .mx-1
       = service_request.department.name
     .col-sm-2.my-table-centered id="sr#{service_request.id}"
-  .row.pt-2.px-3.table-row-bottom.restrict_text.text-to-reveal  style="background-color:#{service_request.background};"
+  .row.pt-2.px-3.table-row-bottom.restrict_text.text-to-reveal style="background-color:#{service_request.background};#{ service_request.important? ? 'border-color:#d9534f' : ''};"
     - if service_request.raport.blank?
       .col-sm-12.p-2.text-start style='border-top:1px solid #303030;'
         .text-muted

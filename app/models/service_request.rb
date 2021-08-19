@@ -40,26 +40,21 @@ class ServiceRequest < ApplicationRecord
   end
 
   def background
-    if important?
-      '#d9534f'
+    case request_status.id
+    when RequestStatus.first.id
+      '#18181A'
+    when RequestStatus.all[1].id
+      '#18181A'
+    when RequestStatus.all[2].id
+      '#18181A'
+    when RequestStatus.all[3].id
+      '#18181A'
+    when RequestStatus.all[4].id
+      ''
     else
-      case request_status.id
-      when RequestStatus.first.id
-        '#18181A'
-      when RequestStatus.all[1].id
-        '#18181A'
-      when RequestStatus.all[2].id
-        '#18181A'
-      when RequestStatus.all[3].id
-        '#18181A'
-      when RequestStatus.all[4].id
-        ''
-      else
-        ''
-      end
+      ''
     end
   end
-  
 
   def check_taken_status
     if request_status.id == RequestStatus.all[0].id
