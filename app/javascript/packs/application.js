@@ -12,8 +12,16 @@ import "bootstrap/dist/css/bootstrap"
 var jQuery = require("jquery")
 global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
+import 'jquery-ui-bundle';
+import 'jquery-ui-bundle/jquery-ui.min.css';
 
 Rails.start()
 ActiveStorage.start()
 
 import "controllers"
+
+$(document).on('turbo:load', function() {
+  $('.text-to-reveal').on('click', function() {
+      $(this).toggleClass('restrict_text', 1000)
+  });
+});
