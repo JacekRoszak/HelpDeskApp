@@ -14,6 +14,9 @@ class ServiceRequest < ApplicationRecord
   after_destroy_commit { broadcast_remove_to 'service_requests'  }
 
   default_scope -> { order('request_status_id', 'service_requests.updated_at desc').where.not('request_status_id IN (5,6) AND service_requests.updated_at < ?', 2.days.ago) }
+
+  scope :closed_requests, -> { where(request_status_id: RequestStatus.closing_statuses) }
+
   def owner
     user.full_name
   end
@@ -74,4 +77,13 @@ class ServiceRequest < ApplicationRecord
       update(closed_at: DateTime.now)
     end
   end
+
+  def self.appruntime
+    (Date.today - ServiceRequest.all.order('created_at DESC').first.created_at.to_date).to_i
+  end
+
+  def self.how_many_per_work_day
+    (ServiceRequest.all.count.to_f / appruntime * 5 / 7).round(2)
+  end
+
 end

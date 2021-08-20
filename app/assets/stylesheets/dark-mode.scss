@@ -23,3 +23,24 @@ body {
   text-overflow: ellipsis;
   height: 47px;
 }
+
+.raport {
+  margin: 20px;
+  padding: 20px;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #222225;
+  border: #e0e0e0 1px solid;
+  border-radius: 15px !important;
+  padding: 10px;
+  word-wrap: none;
+  & table {
+    & .table-header {
+      width: fit-content;
+      margin: 0px auto 10px auto;
+    }
+    & tr {
+        border: none !important;
+    }
+  }
+}
