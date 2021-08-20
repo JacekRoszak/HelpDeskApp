@@ -68,5 +68,10 @@ class ServiceRequest < ApplicationRecord
     initials += ''
     initials
   end
-  
+
+  def mark_if_closing(new_status_id)
+    if (new_status_id.to_i != request_status_id) && (new_status_id.to_i.in? RequestStatus.closing_statuses)
+      update(closed_at: DateTime.now)
+    end
+  end
 end

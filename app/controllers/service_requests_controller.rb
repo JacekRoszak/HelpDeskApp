@@ -35,6 +35,8 @@ class ServiceRequestsController < ApplicationController
   end
 
   def update
+    @service_request.mark_if_closing(service_request_params[:request_status_id])
+
     if @service_request.update(service_request_params)
       redirect_to @service_request
     else
