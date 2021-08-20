@@ -6,8 +6,8 @@
       .col-sm-3
         = f.hidden_field :request_status_id, value: @service_request.request_status_id || RequestStatus.first&.id
         = f.hidden_field :user_id, value: current_user.id
-        = f.association :location, label: false, include_blank: 'Location'
-        = f.association :department, collection: Department.technicians, label: false, include_blank: 'Destination'
+        = f.association :location, label: false, include_blank: 'Location', input_html: { title: 'Location' }, data: { toggle: 'tooltip', placement: 'top' }
+        = f.association :department, label: false, collection: Department.technicians, include_blank: 'Destination'
       .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
         = f.input :important, class:'form-check-input', input_html: { id: "#{(0...50).map { ('a'..'z').to_a[rand(26)] }.join}" }
         .btn-group
@@ -19,9 +19,9 @@
   - if ((can? :take_request, @service_request) && (@service_request.technicians.include? current_user)) && params[:btn] == 'process'
     .row.dark-mode
       .col-sm-6
-        = f.input :raport, placeholder: 'Raport', label: false, input_html: { rows: 2, cols: 2}
+        = f.input :raport, placeholder: 'Raport', input_html: { rows: 2, cols: 2}
       .col-sm-3
-        = f.association :request_status, collection: RequestStatus.all.drop(1), label: false, include_blank: false
+        = f.association :request_status, collection: RequestStatus.all.drop(1), include_blank: false
       - if !(((can? :edit_his_req_params, @service_request) || @service_request.new_record?)&& params[:btn] != 'process' )
         .col-sm-3.row.form-check.d-flex.justify-content-center style='align-items:center;'
           .btn-group
