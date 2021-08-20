@@ -3,7 +3,7 @@
     = link_to 'process', edit_service_request_path(service_request, btn: 'process'), class: 'btn btn-primary btn-sm m-1', id: 'edit' 
   - else
     = link_to service_request_take_request_path(@service_request), class: 'btn btn-primary btn-sm m-1' do
-      i class="bi bi-folder2-open"
+      i class="bi bi-person-plus"
 - if can? :edit_his_req_params, @service_request
   = link_to edit_service_request_path(service_request), class: 'btn btn-primary btn-sm m-1', id: 'edit' do
     i class="bi bi-pencil-square"
