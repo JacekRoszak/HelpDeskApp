@@ -31,12 +31,18 @@
   .row.pt-2.px-3.table-row-bottom.restrict_text.text-to-reveal style="background-color:#{service_request.background};#{ service_request.important? ? 'border-color:#d9534f' : ''};"
     - if service_request.raport.blank?
       .col-sm-12.p-2.text-start style='border-top:1px solid #303030;'
-        .text-muted
+        .text-muted style='position:relative;'
           = simple_format(service_request.name)
+          .float-end style='position:absolute;top:0;right:0;'
+            i class="bi bi-arrow-bar-down"
     - else
       .col-sm-6.p-2.text-start style='border-top:1px solid #303030;'
-        .text-muted
+        .text-muted style='position:relative;'
           = simple_format(service_request.name)
+          .float-end style='position:absolute;top:0;right:0;'
+            i class="bi bi-arrow-bar-down"
       .col-sm-6.p-2.text-start style='border-top:1px solid #303030;border-left:1px solid #303030;'
-        .text-muted.text-start
+        .text-muted.text-start style='position:relative;'
           = simple_format(service_request.raport)
+          .float-end style='position:absolute;top:0;right:0;'
+            i class="bi bi-arrow-bar-down"

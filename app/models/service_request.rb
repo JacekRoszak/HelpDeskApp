@@ -16,6 +16,7 @@ class ServiceRequest < ApplicationRecord
   default_scope -> { order('request_status_id', 'service_requests.updated_at desc').where.not('request_status_id IN (5,6) AND service_requests.updated_at < ?', 2.days.ago) }
 
   scope :closed_requests, -> { where(request_status_id: RequestStatus.closing_statuses) }
+  scope :todays_requests, -> { where('created_at > ?', Date.today.midnight).count }
 
   def owner
     user.full_name
@@ -85,5 +86,4 @@ class ServiceRequest < ApplicationRecord
   def self.how_many_per_work_day
     (ServiceRequest.all.count.to_f / appruntime * 5 / 7).round(2)
   end
-
 end

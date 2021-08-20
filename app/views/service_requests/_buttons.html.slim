@@ -7,6 +7,6 @@
 - if can? :edit_his_req_params, @service_request
   = link_to edit_service_request_path(service_request), class: 'btn btn-primary btn-sm m-1', id: 'edit' do
     i class="bi bi-pencil-square"
-- if can? :edit_his_req_params, @service_request
+- if can? :manage, @service_request
   = link_to service_request_path(service_request), method: :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, class: 'btn btn-sm btn-danger m-1', id: 'delete' do
     i class="bi bi-trash" 

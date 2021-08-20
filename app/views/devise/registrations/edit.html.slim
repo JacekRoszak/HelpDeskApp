@@ -1,10 +1,6 @@
 .dark-mode.edit-profile.mt-4.text-center.mx-auto
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-    .d-inline-block.align-top.mt-1
-      h3 = t('.title', resource: resource_name.to_s.humanize)
-    .d-inline-block style='padding-left:10px;'
-      = f.submit t('.update'), class: 'btn btn-outline-primary float-end'
-    br
+    h3 = t('.title', resource: resource_name.to_s.humanize)
     = bootstrap_devise_error_messages!
     .d-inline-block.p-2 style='width: 350px !important;'
       = f.text_field :first_name, autocomplete: 'given-name', placeholder: 'first name'
@@ -21,7 +17,7 @@
         = f.text_field :work_number, style: 'width:100% !important;', placeholder: 'work number'
       .col-4.p-0
         = f.text_field :inner_number, style: 'width:100% !important;', placeholder: 'inner number'
-      
+    = f.submit t('.update'), class: 'btn btn-outline-primary mb-3'
     
   .text-center
     h6 Two Factor Authentication

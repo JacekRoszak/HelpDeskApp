@@ -13,7 +13,7 @@ class Ability
         can :manage, :all
       else
         # User can manage his own requests
-        can [:manage, :edit_his_req_params], ServiceRequest, user_id: user.id
+        can :manage, ServiceRequest, user_id: user.id
         # Technician can read a request, if it was send to his department
         if user.technician?
           can [:read, :edit, :update], ServiceRequest, department_id: user.department_id
