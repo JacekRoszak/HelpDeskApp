@@ -10,6 +10,7 @@ gem 'arctic_admin'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cancancan'
 gem 'capybara'
+gem 'colorize'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'devise-two-factor'

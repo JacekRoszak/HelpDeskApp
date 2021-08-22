@@ -68,7 +68,7 @@ class ServiceRequest < ApplicationRecord
 
   def technicians_initials
     initials = ''
-    technicians.each { |t| initials+= "#{t.first_name[0]}.#{t.last_name[0]}. " }
+    technicians.each { |t| initials += "#{t.first_name[0]}.#{t.last_name[0]}. " }
     initials += ''
     initials
   end
@@ -85,5 +85,11 @@ class ServiceRequest < ApplicationRecord
 
   def self.how_many_per_work_day
     (ServiceRequest.all.count.to_f / appruntime * 5 / 7).round(2)
+  end
+
+  def send_create_notifications(requestee, path)
+    department.users.each do |u|
+      NotificationMailer.new_service_request(u.email, self, path).deliver_later if u != user
+    end
   end
 end

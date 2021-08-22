@@ -28,6 +28,7 @@ class ServiceRequestsController < ApplicationController
 
   def create
     if @service_request.save
+      @service_request.send_create_notifications(current_user, service_requests_url)
       redirect_to service_requests_path
     else
       render turbo_stream: turbo_stream.replace(@service_request, partial: 'service_requests/form')

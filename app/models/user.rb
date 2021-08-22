@@ -41,4 +41,8 @@ class User < ApplicationRecord
   def technician?
     department.technicians?
   end
+
+  def self.technicians
+    joins(:department).where(department: { technicians?: true })
+  end
 end
