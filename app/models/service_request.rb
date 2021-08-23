@@ -66,13 +66,6 @@ class ServiceRequest < ApplicationRecord
     end
   end
 
-  def technicians_initials
-    initials = ''
-    technicians.each { |t| initials += "#{t.first_name[0]}.#{t.last_name[0]}. " }
-    initials += ''
-    initials
-  end
-
   def mark_if_closing(new_status_id)
     if (new_status_id.to_i != request_status_id) && (new_status_id.to_i.in? RequestStatus.closing_statuses)
       update(closed_at: DateTime.now)
@@ -87,9 +80,14 @@ class ServiceRequest < ApplicationRecord
     (ServiceRequest.all.count.to_f / appruntime * 5 / 7).round(2)
   end
 
-  def send_create_notifications(requestee, path)
+  def send_create_notifications(path)
     department.users.each do |u|
       NotificationMailer.new_service_request(u.email, self, path).deliver_later if u != user
     end
+  end
+
+  def send_update_notifications(editor, path)
+    technicians.each { |u| NotificationMailer.update_service_request(u.email, self, path, editor).deliver_later if u != editor }
+    NotificationMailer.update_service_request(user.email, self, path, editor).deliver_later if user != editor
   end
 end

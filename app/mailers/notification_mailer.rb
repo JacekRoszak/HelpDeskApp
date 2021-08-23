@@ -6,9 +6,11 @@ class NotificationMailer < ApplicationMailer
     mail(to: 'jacekroszak1986@gmail.com', subject: 'New service request in HelpDeskApp', from: 'EmailForAppNotifications@gmail.com')
   end
 
-  def update_service_request(email, request, link)
+  def update_service_request(email, request, link, editor)
     @request = request
     @link = link
-    mail(to: email, subject: 'Your request has been updated!')
+    @editor = editor
+    # replace email
+    mail(to: 'jacekroszak1986@gmail.com', subject: 'Your request has been updated!', from: 'EmailForAppNotifications@gmail.com')
   end
 end
