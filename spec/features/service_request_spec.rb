@@ -52,7 +52,6 @@ RSpec.feature ServiceRequest do
     visit '/service_requests'
 
     expect(page).to have_content 'Service requests'
-    puts "############## #{@technician.technician?}"
     expect(page).to have_content @users_service_request.name
     expect(page).not_to have_content @another_users_service_request.name
   end
