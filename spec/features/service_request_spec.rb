@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature ServiceRequest do
+RSpec.feature ServiceRequest, driver: :selenium_chrome, js: true do
   before do
     @department = Department.create!(name: 'HR', technicians?: false)
     @technicians_department = Department.create!(name: 'IT', technicians?: true)
@@ -23,36 +23,65 @@ RSpec.feature ServiceRequest do
     @another_users_service_request = ServiceRequest.create!(name: 'another request', request_status_id: @request_status.id, user_id: @another_user.id, location_id: @location.id, department_id: @department.id)
   end
 
-  scenario 'User cannot list requests without signing in' do
-    @user.destroy
-    visit '/service_requests'
+  context 'User' do
+    before do
+      sign_in @user
+      visit '/service_requests'
+    end
 
-    expect(page).to have_content 'You are not authorized to access this page.'
-    expect(current_path).to eq(new_user_session_path)
+    scenario 'cannot list requests without signing in' do
+      @user.destroy
+      visit '/service_requests'
+
+      expect(page).to have_content 'You are not authorized to access this page.'
+      expect(current_path).to eq(new_user_session_path)
+    end
+
+    scenario 'lists his requests' do
+      expect(page).to have_content 'Service requests'
+      expect(page).to have_content @users_service_request.name
+    end
+
+    scenario 'cannot list other users requests' do
+      expect(page).to have_content 'Service requests'
+      expect(page).not_to have_content @another_users_service_request.name
+    end
+
+    scenario 'can edit his reqest' do
+      expect(page).to have_content 'Service requests'
+      expect(page).to have_content @users_service_request.name
+
+      find("#sr#{@users_service_request.id}")
+      expect(page).to have_content 'Dupsko'
+      # link(nil, href: edit_service_request_path(@users_service_request))
+    end
+
+    scenario 'can delete his reguest'
   end
 
-  scenario 'User lists his requests' do
-    sign_in @user
-    visit '/service_requests'
+  context 'Technician' do
+    before do
+      sign_in @technician
+      visit '/service_requests'
+    end
 
-    expect(page).to have_content 'Service requests'
-    expect(page).to have_content @users_service_request.name
+    scenario 'lists all requests directed to his department' do
+      expect(page).to have_content 'Service requests'
+      expect(page).to have_content @users_service_request.name
+      expect(page).not_to have_content @another_users_service_request.name
+    end
+
+    scenario 'adds his request' do
+      
+    end
+
+    scenario 'edits his own request'
+    scenario 'delets his own request'
+    scenario 'cannot edit other user request'
+    scenario 'cannot delete other user request'
+    scenario 'takes a request'
+    scenario 'processes a request'
+
   end
-
-  scenario 'User doesnt list other users requests' do
-    sign_in @user
-    visit '/service_requests'
-
-    expect(page).to have_content 'Service requests'
-    expect(page).not_to have_content @another_users_service_request.name
-  end
-
-  scenario 'Technician lists all requests directed to his department' do
-    sign_in @technician
-    visit '/service_requests'
-
-    expect(page).to have_content 'Service requests'
-    expect(page).to have_content @users_service_request.name
-    expect(page).not_to have_content @another_users_service_request.name
-  end
+  
 end
