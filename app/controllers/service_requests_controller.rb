@@ -38,7 +38,6 @@ class ServiceRequestsController < ApplicationController
 
   def update
     @service_request.mark_if_closing(service_request_params[:request_status_id])
-
     if @service_request.update(service_request_params)
       @service_request.send_update_notifications(current_user, service_requests_url)
       redirect_to @service_request
@@ -49,7 +48,8 @@ class ServiceRequestsController < ApplicationController
 
   def destroy
     @service_request.destroy
-    redirect_to service_requests_url
+    flash.now[:alert] = 'Request have been successfully deleted.'
+    render turbo_stream: turbo_stream.replace(@service_request, partial: '/layouts/alerts')
   end
 
   private

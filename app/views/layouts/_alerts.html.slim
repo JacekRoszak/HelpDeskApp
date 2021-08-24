@@ -1,8 +1,7 @@
 - flash.each do |key, message|
-  #alerts
+  .alerts
     .text-center class="alert alert-#{ key }"
       .container
         = message.class == Array ? message.join('<br>').html_safe : message
-
-javascript:
-  $('#alerts').fadeOut(6000);
+/ javascript:
+/   $('#alerts').fadeOut(6000);

@@ -1,5 +1,5 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
-#alerts {
+.alerts {
 	& .alert-alert {
 		@extend .alert-danger
 	}
@@ -7,4 +7,20 @@
 	& .alert-notice {
 		@extend .alert-success
 	}
+	animation: alerts ease 5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes alerts {
+  0% {
+    opacity: 1;
+  }
+	90% {
+		opacity: 0.1;
+		height: 65px;
+	}
+	100% {
+    opacity: 0;
+		height: 0;
+  }
 }

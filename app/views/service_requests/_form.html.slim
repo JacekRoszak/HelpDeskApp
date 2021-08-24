@@ -2,7 +2,7 @@
   - if (((can? :edit_his_req_params, @service_request) || @service_request.new_record?) && params[:btn] != 'process' )
     .row.dark-mode
       .col-sm-6
-        = f.input :name, placeholder: 'New request', label: false, input_html: { rows: 2, cols: 2}
+        = f.input :name, placeholder: 'New request', label: false, input_html: { rows: 2, cols: 2 }
       .col-sm-3
         = f.hidden_field :request_status_id, value: @service_request.request_status_id || RequestStatus.first&.id
         = f.hidden_field :user_id, value: current_user.id
@@ -14,7 +14,7 @@
           - if @service_request.new_record?
             = f.button :submit, 'add', class: 'btn-primary btn btn-sm'
           - else
-            = f.button :submit, 'save', class: 'btn-primary btn btn-sm'
+            = f.button :submit, 'save', class: 'btn-primary btn btn-sm', id: 'submit'
             = link_to 'cancel', @service_request, class: 'btn btn-primary btn-sm'
   - if ((can? :take_request, @service_request) && (@service_request.technicians.include? current_user)) && params[:btn] == 'process'
     .row.dark-mode

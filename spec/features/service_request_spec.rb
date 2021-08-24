@@ -20,6 +20,7 @@ RSpec.feature ServiceRequest, driver: :selenium_chrome, js: true do
     @technician.save
 
     @users_service_request = ServiceRequest.create!(name: 'test request', request_status_id: @request_status.id, user_id: @user.id, location_id: @location.id, department_id: @technicians_department.id)
+    @users_second_service_request = ServiceRequest.create!(name: 'second request', request_status_id: @request_status.id, user_id: @user.id, location_id: @location.id, department_id: @technicians_department.id)
     @another_users_service_request = ServiceRequest.create!(name: 'another request', request_status_id: @request_status.id, user_id: @another_user.id, location_id: @location.id, department_id: @department.id)
   end
 
@@ -47,16 +48,36 @@ RSpec.feature ServiceRequest, driver: :selenium_chrome, js: true do
       expect(page).not_to have_content @another_users_service_request.name
     end
 
-    scenario 'can edit his reqest' do
-      expect(page).to have_content 'Service requests'
-      expect(page).to have_content @users_service_request.name
+    scenario 'can create a new request'
 
-      find("#sr#{@users_service_request.id}")
-      expect(page).to have_content 'Dupsko'
-      # link(nil, href: edit_service_request_path(@users_service_request))
+    scenario 'can edit his reqest' do
+      find("#sr#{@users_service_request.id}") # wait for buttons to appear
+      expect(page).to have_link(nil, href: edit_service_request_path(@users_service_request))
+      click_link nil, href: edit_service_request_path(@users_service_request)
+
+      find("#edit_service_request_#{@users_service_request.id}") # wait for form
+      within 'form', id: "edit_service_request_#{@users_service_request.id}" do
+        fill_in 'service_request[name]', with: 'This is a new name'
+        click_button 'commit'
+      end
+      find("div[data-requests-url-value='#{service_request_btn_path(service_request_id: @users_service_request.id)}']") # wait for show action
+      @users_service_request.reload
+      expect(@users_service_request.name).to eq 'This is a new name'
     end
 
-    scenario 'can delete his reguest'
+    scenario 'can delete his reguest' do
+      number_of_requests = ServiceRequest.count
+      find("#sr#{@users_service_request.id}") # wait for buttons to appear
+      within 'div', id: "sr#{@users_service_request.id}" do
+        expect(page).to have_link(nil, href: service_request_path(@users_service_request))
+        accept_alert do
+          click_link nil, href: service_request_path(@users_service_request)
+        end
+      end
+
+      find(".alerts") # wait alert
+      expect(ServiceRequest.count).to eq(2)
+    end
   end
 
   context 'Technician' do
