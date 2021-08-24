@@ -10,25 +10,26 @@ br
 | You will have to install Google Authenticaton on your phone and scan the QR code with it. Everytime you will sign in, you will have to rewrite a code from this application.
 
 br
-.raport
-  table
-    thead
-      tr
-        th colspan=2
-          h4.table-header Requests Raport
-    tbody
-      tr
-        td.p-0 App runtime
-        td.p-0 = ServiceRequest.appruntime
-      tr
-        td.p-0 Requests number
-        td.p-0 = ServiceRequest.all.count
-      tr
-        td.p-0 Closed
-        td.p-0 = ServiceRequest.closed_requests.count
-      tr
-        td.p-0 How many per day
-        td.p-0 = ServiceRequest.how_many_per_work_day
-      tr 
-        td.p-0 Todays requests
-        td.p-0 = ServiceRequest.todays_requests
+- if ServiceRequest.count > 0
+  .raport
+    table
+      thead
+        tr
+          th colspan=2
+            h4.table-header Requests Raport
+      tbody
+        tr
+          td.p-0 App runtime
+          td.p-0 = ServiceRequest.appruntime
+        tr
+          td.p-0 Requests number
+          td.p-0 = ServiceRequest.all.count
+        tr
+          td.p-0 Closed
+          td.p-0 = ServiceRequest.closed_requests.count
+        tr
+          td.p-0 How many per day
+          td.p-0 = ServiceRequest.how_many_per_work_day
+        tr 
+          td.p-0 Todays requests
+          td.p-0 = ServiceRequest.todays_requests
